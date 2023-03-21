@@ -1,0 +1,148 @@
+/* GLOBAL SELECTORS -------------------------------------------------------------*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Roboto';
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    font-size: 25px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+ul {
+    display: flex;
+    gap: 50px;
+}
+
+ul a {
+    color: black;
+}
+
+.Logo {
+    color: red;
+    margin-right: 15px;
+    transition: all 0.3s;
+}
+
+h1 {
+    margin: 30px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
+
+/* NAV USER/ADMIN -----------------------------------------------------------------------------------*/
+
+nav a {
+    font-size: 26px;
+}
+
+p {
+    font-size: 16px;
+}
+
+/* CARD INDEX ------------------------------------------------------------------------*/
+
+
+.card {
+    height: 550px;
+    width: 250px;
+    /* border: 1px solid rgba(0, 0, 0, 0.122); */
+    padding: 30px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    gap: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.071);
+    overflow: hidden;
+}
+
+.card img {
+    object-fit: cover;
+    height: 200px;
+    width: 220px;
+}
+
+.container {
+    margin-top: 30px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+.txt {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cardTxt {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.btn {
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    padding: 5px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.btn:hover {
+    color: white;
+    background-color: red;
+}
+
+.card h4,
+.cardProduit h4 {
+    font-size: 22px;
+    text-align: center;
+}
+
+/* FORM ---------------------------------------------------------------*/
+
+
+form {
+    margin: 34px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.184);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.137);
+}

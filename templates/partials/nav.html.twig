@@ -1,5 +1,5 @@
 <nav>
-	<a class='Logo' href="">WTNN</a>
+	<a class='Logo' href={{path('app_home')}}>WTNN</a>
 
 	<ul class='list-nav'>
 		<li>
@@ -11,17 +11,17 @@
 
 		{% if app.user %}
 			<li>
-				<a href="">{{'Profil' | upper}}</a>
+				<a href={{path('app_account')}}>{{'Profil' | upper}}</a>
 			</li>
 			<li>
-				<a href="">{{'logout' | upper}}</a>
+				<a href={{path('app_logout')}}>{{'logout' | upper}}</a>
 			</li>
 		{% else %}
 			<li>
-				<a href="">{{'Sign up' | upper}}</a>
+				<a href={{path('app_register')}}>{{'Sign up' | upper}}</a>
 			</li>
 			<li>
-				<a href="">{{'Sign in' | upper}}</a>
+				<a href={{path('app_login')}}>{{'Sign in' | upper}}</a>
 			</li>
 		{% endif %}
 		<li>

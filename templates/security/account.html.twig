@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!
+{% endblock %}
+
+{% block body %}
+	<div class="infos" style="text-align: center">
+		<h1>Your account</h1>
+		<h2>{{app.user.prenom}}
+			{{app.user.nom}}</h2>
+		<h3>Email:</h3>
+		<p>{{app.user.email}}</p>
+		<h3>Address:</h3>
+		<p>{{app.user.adresse}}
+        	{{app.user.codepostal}}
+			{{app.user.ville}}
+			{{app.user.pays}}</p>
+            <hr>
+            <button><a href={{path('app_address',{'id':app.user.id})}}>Edit my address</a></button>
+		<h3>Mes commandes:</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>N° commande</th>
+					<th>Date</th>
+					<th>Montant</th>
+					<th>Statut</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+{% endblock %}

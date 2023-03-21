@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home
+	{{parent()}}
+{% endblock %}
 
 {% block body %}
 
+	<div class='hero'>
+		<a href=''>
+			<img src='https://cdn.shopify.com/s/files/1/2358/2817/files/Slider_Desktop_FR_01_1cd00c80-4b4a-4604-a126-712a6cf55203.jpg?v=1679393600'>
+		</a>
+	</div>
+
+	<div class='container'>
+		{% for produit in produits %}
+			<a href=''>
+				<div class='card'>
+					<img src='{{produit.photourl}}' alt='{{produit.slug}}'>
+					<h3>{{produit.nom}}</h3>
+					<p class='brand'>
+						{{ produit.categorie | upper }}
+					</p>
+					<p class='price'>
+						{{produit.prix}}
+						$
+					</p>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
 {% endblock %}

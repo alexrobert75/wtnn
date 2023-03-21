@@ -6,6 +6,7 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Roboto';
+    font-weight: 100;
 }
 
 body {
@@ -37,15 +38,22 @@ ul a {
     color: red;
     margin-right: 15px;
     transition: all 0.3s;
+    font-weight: 400;
 }
 
-h1 {
-    margin: 30px;
-    text-align: center;
+a {
+    color: black;
 }
 
-footer {
-    text-align: center;
+.container {
+    /* margin-top: 30px; */
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    flex-grow: 1;
 }
 
 /* NAV USER/ADMIN -----------------------------------------------------------------------------------*/
@@ -58,13 +66,23 @@ p {
     font-size: 16px;
 }
 
+/* MAIN ----------------------------------------------------------------*/
+.hero {
+    width: 100vw;
+    height: 60vh;
+    margin-bottom: 100px;
+}
+
+.hero img {
+    object-fit: contain;
+}
+
 /* CARD INDEX ------------------------------------------------------------------------*/
 
 
 .card {
-    height: 550px;
-    width: 250px;
-    /* border: 1px solid rgba(0, 0, 0, 0.122); */
+    /* height: 550px; */
+    width: 360px;
     padding: 30px;
     margin-left: 10px;
     display: flex;
@@ -72,64 +90,21 @@ p {
     justify-content: space-between;
     align-items: center;
     border-radius: 15px;
-    gap: 20px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.071);
+    gap: 5px;
+    /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.071); */
     overflow: hidden;
 }
 
 .card img {
     object-fit: cover;
     height: 200px;
-    width: 220px;
+    width: 300px;
 }
 
-.container {
-    margin-top: 30px;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 30px;
-    flex-grow: 1;
-}
-
-.txt {
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-}
-
-.cardTxt {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    /* justify-content: center; */
-    align-items: center;
-}
-
-.btn {
-    color: red;
-    background-color: white;
-    border: 1px solid red;
-    padding: 5px;
-    border-radius: 10px;
-    transition: all 0.3s;
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-.btn:hover {
-    color: white;
-    background-color: red;
-}
-
-.card h4,
-.cardProduit h4 {
-    font-size: 22px;
-    text-align: center;
+.brand,
+h3,
+.price {
+    font-weight: 300;
 }
 
 /* FORM ---------------------------------------------------------------*/

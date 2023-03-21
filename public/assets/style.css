@@ -121,3 +121,17 @@ form {
     padding: 20px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.137);
 }
+
+
+/* ACCOUNT PAGE -------------------------------------------------------------*/
+
+.infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.infos h2,h3,table,p {
+    margin: 0.5em;
+}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+	<div class='container'>
+		{% for marque in marques %}
+
+				<div class='brand'>
+					<div class="logomarque">
+						<img src={{marque.logo}} alt={{marque.nom}} class='logomarque'>
+					</div>
+					<h3>{{marque.nom}}</h3>
+					<p>{{marque.description  | slice(0,100)}}...</p>
+                    <button><a href={{path('app_products',{'brand':marque.id})}}>See products</a></button>
+				</div>
+		{% endfor %}
+	</div>
+{% endblock %}

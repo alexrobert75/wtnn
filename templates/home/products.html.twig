@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	<div class='container'>
+		{% for produit in produits %}
+			<a href=''>
+				<div class='card'>
+					<img src='{{produit.photourl}}' alt='{{produit.slug}}'>
+					<h3>{{produit.nom}}</h3>
+					<p class='brand'>
+						{{ produit.categorie | upper }}
+					</p>
+					<p class='price'>
+						{{produit.prix}}
+						$
+					</p>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

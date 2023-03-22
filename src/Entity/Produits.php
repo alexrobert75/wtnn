@@ -46,6 +46,10 @@ class Produits
     #[ORM\OneToMany(mappedBy: 'id_produit', targetEntity: TailleStock::class)]
     private Collection $tailleStocks;
 
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Marques $marque = null;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -206,6 +210,18 @@ class Produits
                 $tailleStock->setIdProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marques
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marques $marque): self
+    {
+        $this->marque = $marque;
 
         return $this;
     }

@@ -132,6 +132,32 @@ form {
     flex-direction: column;
 }
 
-.infos h2,h3,table,p {
+.infos h2,
+h3,
+table,
+p {
     margin: 0.5em;
+}
+
+/*BRANDS ------------------------------------------------- */
+
+.brand {
+    /* height: 550px; */
+    width: 360px;
+    padding: 30px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    gap: 5px;
+    /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.071); */
+    overflow: hidden;
+}
+
+.logomarque {
+    width: 80%;
+    display: flex;
+    justify-content: center;
 }

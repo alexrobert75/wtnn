@@ -56,25 +56,73 @@ a {
     flex-grow: 1;
 }
 
+footer {
+    text-align: center;
+}
+
 /* NAV USER/ADMIN -----------------------------------------------------------------------------------*/
 
 nav a {
     font-size: 26px;
 }
 
-p {
+nav p {
     font-size: 16px;
 }
 
 /* MAIN ----------------------------------------------------------------*/
 .hero {
+    /* border: 1px solid black; */
     width: 100vw;
-    height: 60vh;
+    background-color: #e8e8e8;
     margin-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    align-items: center;
 }
 
-.hero img {
-    object-fit: contain;
+.contain-img {
+    height: 70vh;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-txt {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3em;
+    height: 400px;
+}
+
+.hero-txt .hero-new {
+    font-size: 65px;
+    font-weight: 500;
+}
+
+.hero-txt span {
+    font-weight: 500;
+}
+
+.hero-txt p,
+span {
+    font-size: 35px;
+    font-weight: 100;
+}
+
+.btn-home {
+    background-color: black;
+    color: #e8e8e8;
+    font-size: 22px;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+    font-weight: 300;
 }
 
 /* CARD INDEX ------------------------------------------------------------------------*/
@@ -135,7 +183,7 @@ form {
 .infos h2,
 h3,
 table,
-p {
+.infos p {
     margin: 0.5em;
 }
 
@@ -161,3 +209,4 @@ p {
     display: flex;
     justify-content: center;
 }
+

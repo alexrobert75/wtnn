@@ -7,6 +7,7 @@ use App\Entity\ProductSearch;
 use App\Form\ProductSearchType;
 use App\Repository\MarquesRepository;
 use App\Repository\ProduitsRepository;
+use App\Repository\TailleStockRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,6 +58,17 @@ class HomeController extends AbstractController
         return $this->render('home/products.html.twig', [
             'produits' => $produits,
             'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/ficheproduct/{id}', name: 'app_ficheProduct')]
+    public function ficheProduct(ProduitsRepository $produitsRepository, $id, TailleStockRepository $tailleStockRepository): Response
+    {
+        $tailleStocks = $tailleStockRepository->findAll();
+        $produit = $produitsRepository->find($id);
+        return $this->render('home/ficheProduct.html.twig', [
+            'produit' => $produit,
+            'taille' => $tailleStocks
         ]);
     }
 }

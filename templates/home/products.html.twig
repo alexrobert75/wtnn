@@ -6,12 +6,12 @@
 
 {% block body %}
 
-{{form_start(form)}}
-{{form_end(form)}}
+	{{form_start(form)}}
+	{{form_end(form)}}
 
 	<div class='container'>
 		{% for produit in produits %}
-			<a href=''>
+			<a href='/ficheproduct/{{ produit.id }}'>
 				<div class='card'>
 					<img src='{{produit.photourl}}' alt='{{produit.slug}}'>
 					<h3>{{produit.nom}}</h3>

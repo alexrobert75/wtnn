@@ -13,7 +13,11 @@
 		{% for produit in produits %}
 			<a href=''>
 				<div class='card'>
-					<img src='{{produit.photourl}}' alt='{{produit.slug}}'>
+					<img src={% if 'cdn.shopify' in produit.photourl %}
+					{{produit.photourl}} 
+					{% else %}
+					../assets/img/{{produit.photourl}} 	
+					{% endif %} alt='{{produit.slug}}'>
 					<h3>{{produit.nom}}</h3>
 					<p class='brand'>
 						{{ produit.categorie | upper }}

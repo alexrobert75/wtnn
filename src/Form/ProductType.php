@@ -18,7 +18,7 @@ class ProductType extends AbstractType
             ->add('categorie')
             ->add('description')
             ->add('prix')
-            ->add('photoUrl')
+            ->add('image', FileType::class)
             ->add('couleur')
             ->add('ref')
             ->add('commandes')

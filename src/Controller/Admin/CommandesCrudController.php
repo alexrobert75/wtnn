@@ -18,7 +18,7 @@ class CommandesCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield MoneyField::new ('montant')->setCurrency('EUR');
+        yield MoneyField::new ('montant')->setCurrency('EUR')->setNumDecimals(0);
         yield ChoiceField::new ('statut')->setChoices([
             'Paid' => 'Paid',
             'Validated' => 'Validated',

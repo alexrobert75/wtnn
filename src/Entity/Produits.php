@@ -47,7 +47,7 @@ class Produits
     private Collection $tailleStocks;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Marques $marque = null;
 
     public function __construct()

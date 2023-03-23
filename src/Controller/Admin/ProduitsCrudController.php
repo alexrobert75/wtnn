@@ -6,6 +6,7 @@ use App\Entity\Produits;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -29,15 +30,17 @@ class ProduitsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new ('nom');
-        yield AssociationField::new ('marque')
-        ->setFormTypeOptions(['by_reference' => false,]);
+        yield AssociationField::new ('marque');
         yield TextField::new ('categorie');
         yield TextEditorField::new ('description');
-        yield MoneyField::new ('prix')->setCurrency('EUR');
-        yield TextField::new ('photo_url')->hideOnIndex();
+        yield NumberField::new ('prix');
+        // yield TextField::new ('photo_url')->hideOnIndex();
+        yield ImageField::new ('photo_url')
+            ->setBasePath('assets/img/')
+            ->setUploadDir("public\assets\img");
         yield TextField::new ('couleur');
         yield TextField::new ('ref');
-        yield SlugField::new('slug')->setTargetFieldName('nom')->hideOnForm()->hideOnIndex();
+        yield SlugField::new ('slug')->setTargetFieldName('nom')->hideOnIndex();
 
     }
 

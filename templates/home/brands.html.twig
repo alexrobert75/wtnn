@@ -16,7 +16,7 @@
 					</div>
 					<h3>{{marque.nom}}</h3>
 					<p>{{marque.description  | slice(0,100)}}...</p>
-                    <button><a href={{path('app_products',{'brand':marque.id})}}>See products</a></button>
+                    <button><a href='../products?q=&marque%5B%5D={{marque.id}}'>See products</a></button>
 				</div>
 		{% endfor %}
 	</div>

@@ -4,8 +4,11 @@ namespace App\Repository;
 
 use Doctrine\ORM\Query;
 use App\Entity\Produits;
-use App\Entity\ProductSearch;
+use App\Data\ProductSearch;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
@@ -18,9 +21,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class ProduitsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Produits::class);
+        $this->paginator = $paginator;
     }
 
     public function save(Produits $entity, bool $flush = false): void
@@ -65,4 +69,39 @@ class ProduitsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findSearch(ProductSearch $search): PaginationInterface{
+        $query = $this
+        ->createQueryBuilder('p')
+        ->select('c','p')
+        ->join('p.marque', 'c');
+
+        if (!empty($search->q)){
+            $query = $query->andWhere('p.nom LIKE :q')
+            ->setParameter('q', "%{$search->q}%");
+        }
+
+        if (!empty($search->marque)){
+            $query = $query->andWhere('c.id IN (:marque)')
+            ->setParameter('marque',$search->marque);
+        }
+
+        if (!empty($search->prixmin)){
+            $query = $query
+            ->andWhere('p.prix >= :prixmin')
+            ->setParameter('prixmin',$search->prixmin);
+        }
+
+        if (!empty($search->prixmax)){
+            $query = $query
+            ->andWhere('p.prix <= :prixmax')
+            ->setParameter('prixmax',$search->prixmax);
+        }
+
+        $query = $query->getQuery();
+        return $this->paginator->paginate(
+            $query, $search->page, 9
+        );
+    }
+
 }

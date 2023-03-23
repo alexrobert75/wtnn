@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produits;
-use App\Entity\ProductSearch;
+use App\Data\ProductSearch;
 use App\Form\ProductSearchType;
 use App\Repository\MarquesRepository;
 use App\Repository\ProduitsRepository;
@@ -34,27 +34,28 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/products/{brand}', name: 'app_products')]
-    public function products(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, $brand, Request $request): Response
-    {
-        $search = new ProductSearch();
-        $form = $this->createForm(ProductSearchType::class, $search);
-        $form->handleRequest($request);
-
-        $produits = $entityManager->getRepository(Produits::class)->findBy(['marque' => $brand]);
-        return $this->render('home/products.html.twig', [
-            'produits' => $produits,
-            'form' => $form->createView()
-        ]);
-    }
+    // #[Route('/products/{brand}', name: 'app_products')]
+    // public function products(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, $brand, Request $request): Response
+    // {
+    //     $search = new ProductSearch();
+    //     $form = $this->createForm(ProductSearchType::class, $search);
+    //     $form->handleRequest($request);
+    //     $produits = $entityManager->getRepository(Produits::class)->findBy(['marque' => $brand]);
+    //     return $this->render('home/products.html.twig', [
+    //         'produits' => $produits,
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 
     #[Route('/products', name: 'app_prod')]
     public function prod(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $search = new ProductSearch();
-        $form = $this->createForm(ProductSearchType::class, $search);
+        $data = new ProductSearch();
+        $data->page = $request->get('page',1);
+        $form = $this->createForm(ProductSearchType::class, $data);
         $form->handleRequest($request);
-        $produits = $entityManager->getRepository(Produits::class)->findAll();
+        $produits = $produitsRepository->findSearch($data);
+        // $produits = $entityManager->getRepository(Produits::class)->findAll();
         return $this->render('home/products.html.twig', [
             'produits' => $produits,
             'form' => $form->createView()

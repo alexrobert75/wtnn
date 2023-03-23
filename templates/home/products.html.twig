@@ -7,17 +7,25 @@
 {% block body %}
 
 	{{form_start(form)}}
+	{{ form_row(form.q) }}
+	{{ form_row(form.marque) }}
+	{{ form_row(form.prixmin) }}
+	{{ form_row(form.prixmax) }}
+	{{ form_row(form.submit) }}
+	<button>
+		<a href={{path('app_prod')}}>See all</a>
+	</button>
 	{{form_end(form)}}
 
+
 	<div class='container'>
+		<div class="filters">
+			{{knp_pagination_sortable(produits,'Sort by price','p.prix')}}
+		</div>
 		{% for produit in produits %}
 			<a href='/ficheproduct/{{ produit.id }}'>
 				<div class='card'>
-					<img src={% if 'cdn.shopify' in produit.photourl %}
-					{{produit.photourl}} 
-					{% else %}
-					../assets/img/{{produit.photourl}} 	
-					{% endif %} alt='{{produit.slug}}'>
+					<img src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} '../assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
 					<h3>{{produit.nom}}</h3>
 					<p class='brand'>
 						{{ produit.categorie | upper }}
@@ -29,5 +37,9 @@
 				</div>
 			</a>
 		{% endfor %}
+
+	</div>
+	<div class="pagination">
+		{{knp_pagination_render(produits)}}
 	</div>
 {% endblock %}

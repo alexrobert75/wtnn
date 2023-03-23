@@ -3,9 +3,11 @@
 namespace App\DataFixtures;
 
 use DateTime;
+use Faker\Factory;
 use App\Entity\Marques;
 use App\Entity\Produits;
 use Cocur\Slugify\Slugify;
+use App\Entity\TailleStock;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -13,6 +15,7 @@ class ProduitsFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create();
 
         $marques = [];
 
@@ -20,7 +23,7 @@ class ProduitsFixtures extends Fixture
         $marque->setNom('Nike');
         $marque->setDescription("Nike, Inc. is an American multinational corporation that is engaged in the design, development, manufacturing, and worldwide marketing and sales of footwear, apparel, equipment, accessories, and services. The company is headquartered near Beaverton, Oregon, in the Portland metropolitan area. It is the world's largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment, with revenue in excess of US$46 billion in its fiscal year 2022.");
         $marque->setDateCrea(DateTime::createFromFormat('d/m/Y', '25/01/1964'));
-        $marque->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1920px-Logo_NIKE.svg.png");      
+        $marque->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1920px-Logo_NIKE.svg.png");
         $marques['Nike'] = $marque;
         $manager->persist($marque);
 
@@ -28,7 +31,7 @@ class ProduitsFixtures extends Fixture
         $marque1->setNom('Yeezy');
         $marque1->setDescription("Adidas Yeezy (or just Yeezy) was a fashion collaboration between American rapper, designer and entrepreneur Kanye West[a] and German sportswear company Adidas. It offered sneakers in limited edition colorways, as well as shirts, jackets, track pants, socks, slides, lingerie and slippers. The first shoe model was released in February 2015. Yeezy influenced and inspired a multitude of other fashion brands.");
         $marque1->setDateCrea(DateTime::createFromFormat('d/m/Y', '01/02/2015'));
-        $marque1->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Adidas_Yeezy_Logo.png/1920px-Adidas_Yeezy_Logo.png");      
+        $marque1->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Adidas_Yeezy_Logo.png/1920px-Adidas_Yeezy_Logo.png");
         $marques['Yeezy'] = $marque1;
         $manager->persist($marque1);
 
@@ -36,7 +39,7 @@ class ProduitsFixtures extends Fixture
         $marque2->setNom('New Balance');
         $marque2->setDescription("New Balance Athletics, Inc. (NB), best known as simply New Balance, is one of the world's major sports footwear and apparel manufacturers. Based in Boston, Massachusetts, the multinational corporation was founded in 1906 as the New Balance Arch Support Company.");
         $marque2->setDateCrea(DateTime::createFromFormat('d/m/Y', '01/01/1906'));
-        $marque2->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/1280px-New_Balance_logo.svg.png");      
+        $marque2->setLogo("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/1280px-New_Balance_logo.svg.png");
         $marques['NB'] = $marque2;
         $manager->persist($marque2);
 
@@ -47,7 +50,7 @@ class ProduitsFixtures extends Fixture
         $produit = new Produits();
         $produit->setNom('Dunk Low Black White');
         $produit->setSlug($slugify->slugify($produit->getNom()));
-        $produit->setCategorie('Low');
+        $produit->setCategorie('Nike');
         $produit->setDescription("Dévoilée aux côtés des coloris UNLV et Sail Coast, cette Dunk Low se joint à la line-up de janvier, avec un coloris efficace pour commencer l'année !
         La Nike Dunk Low Black White arbore une tige en cuir blanc, rehaussée par des empiècements en cuir noir pour un contraste tout en sobriété. On retrouve un branding NIKE sur la languette et l'outsole. Le jeu de couleur Black & White se poursuit également sur les semelles de la silhouette.
         Dans une version misant sur la simplicité, cette nouvelle édition complète à merveille la gamme des Dunk Low, habituée des couleurs plus chaudes et originales !");
@@ -77,7 +80,7 @@ class ProduitsFixtures extends Fixture
         $produit2 = new Produits();
         $produit2->setNom('Dunk High Panda (2021)');
         $produit2->setSlug($slugify->slugify($produit2->getNom()));
-        $produit2->setCategorie('High');
+        $produit2->setCategorie('Nike');
         $produit->setMarque($marque);
         $produit2->setDescription("Après le succès incontestable de la Dunk Low Black White, Nike décline le coloris sur la version High de la silhouette de l'année 2021 !
         La Nike Dunk High Panda (2021) affiche une construction classique en cuir lisse. Une combinaison d’empiècements noirs et blancs apportent un aspect old school, en clin d'oeil au versions color-block de l'iconique pack Be True To Your School de 1985. La semelle bicolore, les lacets et la languette sont accordés pour un look contrastant.
@@ -93,7 +96,7 @@ class ProduitsFixtures extends Fixture
         $produit3 = new Produits();
         $produit3->setNom('LD Waffle Sacai Fragment Blue Void');
         $produit3->setSlug($slugify->slugify($produit3->getNom()));
-        $produit3->setCategorie('Mid');
+        $produit3->setCategorie('Nike');
         $produit->setMarque($marque);
         $produit3->setDescription("L’emblématique Hiroshi Fujiwara, parrain du streetwear japonais s'associe à Chitose Abe la créatrice de Sacai afin de revisiter le classique de Nike : la LD Waffle.
         La Nike LD Waffle Sacai Fragment Blue Void se pare d'une empeigne en nylon bleu marine, ainsi que des superpositions en daim noir. On retrouve également bon nombre d’éléments doublés, à l’image de la languette, du swoosh latéral ou encore de la semelle intermédiaire. Le logo Fragment sur le mudguard, de même qu’un branding Sacai sur les talons, apportent la touche finale.
@@ -108,7 +111,7 @@ class ProduitsFixtures extends Fixture
         $produit4 = new Produits();
         $produit4->setNom('Dunk Low NBA 75th Anniversary Chicago Bulls');
         $produit4->setSlug($slugify->slugify($produit4->getNom()));
-        $produit4->setCategorie('Low');
+        $produit4->setCategorie('Nike');
         $produit->setMarque($marque);
         $produit4->setDescription("La marque au Swoosh célèbre les 75 ans de la création de la NBA ! Dévoilée aux côtés d'une édition Brooklyn Nets, la nouvelle low-top vient rendre hommage à l'équipe emblématique de Michael Jordan, les Chicago Bulls.
         La Nike Dunk Low NBA 75th Anniversary Chicago Bulls présente une empeigne en cuir blanc, rehaussée par des rappels de rouge sur la toebox et les œillets. On note plusieurs nuances de noir sur les lacets, le Swoosh et le talon. Une inscription '75th Anniversary' sur la languette vient peaufiner le tout.
@@ -123,7 +126,7 @@ class ProduitsFixtures extends Fixture
         $produit5 = new Produits();
         $produit5->setNom('Yeezy 700 Wave Runner Solid Grey');
         $produit5->setSlug($slugify->slugify($produit5->getNom()));
-        $produit5->setCategorie('Mid');
+        $produit5->setCategorie('Yeezy');
         $produit->setMarque($marque1);
         $produit5->setDescription("Le design de la Yeezy Wave Runner 700 est unique, c’est un peu le genre de sneakers qu’on aime ou qu’on déteste. Si vous êtes sur cette page, on devine que cette sneaker ne vous laisse pas indifférent.
         Composée d’un upper en toile grise et en daim bleu, la Yeezy Wave Runner 700 se distingue par sa semelle renforcée, agrémentée de note d’orange et de lacets jaunes clairs.
@@ -139,7 +142,7 @@ class ProduitsFixtures extends Fixture
         $produit6 = new Produits();
         $produit6->setNom('Yeezy Boost 350 V2 Bone');
         $produit6->setSlug($slugify->slugify($produit6->getNom()));
-        $produit6->setCategorie('Mid');
+        $produit6->setCategorie('Yeezy');
         $produit->setMarque($marques['Yeezy']);
         $produit6->setDescription("Le label de Kanye West nous dévoile un nouveau coloris minimaliste et épuré aux inspirations anatomiques. 
         La Adidas Yeezy Boost 350 V2 Bone se pare d'une empeigne monochrome en Primeknit blanc. Une bande transparente vient s’imprégner sur le côté extérieur et rompt l'aspect uniforme de la silhouette. Un heel-tab en tissu se pose sur le talon tandis qu'une semelle à la technologie BOOST finalise le design avant-gardiste. 
@@ -154,7 +157,7 @@ class ProduitsFixtures extends Fixture
         $produit8 = new Produits();
         $produit8->setNom('550 White Nightwatch Green');
         $produit8->setSlug($slugify->slugify($produit8->getNom()));
-        $produit8->setCategorie('Mid');
+        $produit8->setCategorie('New Balance');
         $produit->setMarque($marque2);
         $produit8->setDescription("Modèle rétro par excellence signé New Balance, la 550 se dévoile à travers un coloris épuré.
         La New Balance 550 White Nightwatch Green présente une tige composée de cuir premium blanc accompagnée de petites perforations et de détails, également en cuir, vert et jaune. Le renfort talon se distingue à travers un empiècement en cuir gris qui met en valeur un branding 'NB' vintage jaune en accord avec le 'N' latéral et la mention 550 sur l'avant du pied.
@@ -169,7 +172,7 @@ class ProduitsFixtures extends Fixture
         $produit8 = new Produits();
         $produit8->setNom('550 White Nightwatch Green');
         $produit8->setSlug($slugify->slugify($produit8->getNom()));
-        $produit8->setCategorie('Mid');
+        $produit8->setCategorie('New Balance');
         $produit->setMarque($marque2);
         $produit8->setDescription("Modèle rétro par excellence signé New Balance, la 550 se dévoile à travers un coloris épuré.
         La New Balance 550 White Nightwatch Green présente une tige composée de cuir premium blanc accompagnée de petites perforations et de détails, également en cuir, vert et jaune. Le renfort talon se distingue à travers un empiècement en cuir gris qui met en valeur un branding 'NB' vintage jaune en accord avec le 'N' latéral et la mention 550 sur l'avant du pied.
@@ -182,13 +185,16 @@ class ProduitsFixtures extends Fixture
         $manager->persist($produit8);
 
 
+        $tailleStocks = [];
+        for ($i = 0; $i < 100; $i++) {
+            $tailleStock = new TailleStock();
+            $tailleStock->setTaille($faker->numberBetween(36, 45));
+            $tailleStock->setStock($faker->numberBetween(0, 50));
+            $tailleStock->setIdProduit($faker->randomElement($produits));
+            $tailleStocks[] = $tailleStock;
+            $manager->persist($tailleStock);
+        }
 
         $manager->flush();
-        
     }
-
-
 }
-
-
-

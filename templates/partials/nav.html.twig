@@ -30,5 +30,12 @@
 		<li>
 			<a href="">{{'cart' | upper}}</a>
 		</li>
+		{% if app.user.role is defined and "ROLE_ADMIN" in app.user.role %}
+			<li>
+				<a href={{path('admin')}}>
+					{{'admin' | upper}}</a>
+			</li>
+
+		{% endif %}
 	</ul>
 </nav>

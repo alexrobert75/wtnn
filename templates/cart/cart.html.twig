@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<h1>
+		Your cart</h1>
+	<div class='container-table'>
+		<table>
+			<thead>
+				<tr>
+					<th>Sneaker</th>
+					<th>Size</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Total</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for sneaker in dataCart %}
+					<tr>
+						<th><img src='{{ sneaker.product.photoUrl }}' width='150' alt='{{sneaker.product.slug}}'></th>
+						<th>Vide</th>
+						<th>{{sneaker.quantity}}</th>
+						<th>{{sneaker.product.prix}}
+							$</th>
+						<th>{{sneaker.product.prix * sneaker.quantity}}
+							$
+						</th>
+						<th>
+							<a class='btn-table' href='/cart/add/{{ sneaker.product.id }}'>➕</a>
+							<a class='btn-table' href='/cart/delete/{{ sneaker.product.id }}'>➖</a>
+							<a class='btn-table' href='/cart/remove/{{ sneaker.product.id }}'>❌</a>
+						</th>
+					</tr>
+				{% else %}
+					<tr class='else'>
+						<td colspan='6'>Your cart is empty
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan='4'>
+						Total</td>
+					<td>{{total}}
+						$</td>
+				</tr>
+				<tr>
+					<td colspan='5'></td>
+					<td>
+						<a href='/cart/removeCart'>🗑</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	{# {{dump()}} #}
+{% endblock %}
+{% block stylesheets %}
+	<style>
+		h1 {
+			text-align: center;
+			margin: 50px 0;
+		}
+	</style>
+{% endblock %}

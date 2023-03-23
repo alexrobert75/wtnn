@@ -109,20 +109,29 @@ nav p {
 }
 
 .hero-txt p,
-span {
+.hero-txt span {
     font-size: 35px;
     font-weight: 100;
 }
 
-.btn-home {
+.btn {
     background-color: black;
     color: #e8e8e8;
-    font-size: 22px;
-    padding: 12px;
-    border-radius: 10px;
     text-align: center;
-    width: 150px;
     font-weight: 300;
+    transition: all 0.3s;
+}
+
+.btn-home {
+    width: 150px;
+    padding: 12px;
+    font-size: 22px;
+    border-radius: 10px;
+}
+
+.btn-home:hover {
+    background-color: #216535;
+    color: #e8e8e8;
 }
 
 /* CARD INDEX ------------------------------------------------------------------------*/
@@ -149,10 +158,14 @@ span {
     width: 300px;
 }
 
-.brand,
 h3,
 .price {
     font-weight: 300;
+}
+
+.brand {
+    font-weight: 500;
+    color: rgb(107, 107, 107);
 }
 
 /* FORM ---------------------------------------------------------------*/
@@ -210,3 +223,84 @@ table,
     justify-content: center;
 }
 
+/* FICHE PRODUCT  ----------------------------------------------*/
+
+.card-fiche {
+    /* border: 1px solid black; */
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fiche-txt {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.brand-fiche,
+.price-fiche {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.name-fiche {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.btn-fiche {
+    border: 1px solid red;
+    color: red;
+    background-color: white;
+    padding: 3px;
+    transform: all 0.3s;
+}
+
+.btn-fiche:hover {
+    background-color: red;
+    color: white;
+}
+
+.fiche-txt span {
+    font-weight: 400;
+}
+
+/* TABLE --------------------------------------------------------------------------------*/
+
+table,
+th,
+td {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
+thead th {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+table {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.137);
+    width: 600px;
+}
+
+.container-table {
+    display: flex;
+    justify-content: center;
+}
+
+th,
+td {
+    padding: 15px;
+    font-weight: 200;
+}
+
+tfoot td {
+    font-weight: 400;
+}

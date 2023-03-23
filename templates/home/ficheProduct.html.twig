@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{produit.nom}}
+	{{parent()}}
+{% endblock %}
+
+
+{% block body %}
+	{{ dump(taille) }}
+	<div class='card-fiche'>
+
+		<img src='{{ produit.photoUrl }}'>
+
+		<div class='fiche-txt'>
+			<p class='brand-fiche'>{{ produit.categorie}}</p>
+			<p class='name-fiche'>{{ produit.nom}}</p>
+			<p class='price-fiche'>
+				{{ produit.prix}}
+				$</p>
+			<a class='btn btn-fiche' href=''>Select your size
+			</a>
+			<span>DESCRIPTION:</span>
+			<p class='desc-fiche'>{{ produit.description}}</p>
+			<p class='ref-fiche'>
+				<span>COLOR:</span>
+				{{ produit.couleur}}</p>
+			<p class='ref-fiche'>
+				<span>REF:</span>
+				{{ produit.ref}}</p>
+		</div>
+
+	</div>
+{% endblock %}

@@ -311,3 +311,16 @@ tfoot td {
     font-weight: 600;
     margin: 2em 0;
 }
+
+.productimg {
+    width: 40%;
+    margin-right: 2em;
+    height: 60%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.productimg img {
+    width: 100%;
+}

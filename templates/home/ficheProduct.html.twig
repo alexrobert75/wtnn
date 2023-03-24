@@ -9,8 +9,14 @@
 {% block body %}
 	{{ dump(taille) }}
 	<div class='card-fiche'>
-
-		<img src='{{ produit.photoUrl }}'>
+		<div class="productimg" >
+		<img src=
+					{% if 'cdn.shopify' in produit.photourl %}
+					{{produit.photourl}} 
+					{% else %}
+					../assets/img/{{produit.photourl}} 	
+					{% endif %} alt='{{produit.slug}}'>
+		</div>
 
 		<div class='fiche-txt'>
 			<p class='brand-fiche'>{{ produit.categorie}}</p>

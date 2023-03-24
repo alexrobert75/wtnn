@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Produits;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
@@ -32,7 +33,7 @@ class ProduitsCrudController extends AbstractCrudController
         yield TextField::new ('nom');
         yield AssociationField::new ('marque');
         yield TextField::new ('categorie');
-        yield TextEditorField::new ('description');
+        yield TextareaField::new ('description');
         yield NumberField::new ('prix');
         // yield TextField::new ('photo_url')->hideOnIndex();
         yield ImageField::new ('photo_url')

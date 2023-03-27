@@ -40,9 +40,6 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $ref = null;
 
-    #[ORM\ManyToMany(targetEntity: Commandes::class, mappedBy: 'produits_id')]
-    private Collection $commandes;
-
     #[ORM\OneToMany(mappedBy: 'id_produit', targetEntity: TailleStock::class)]
     private Collection $tailleStocks;
 
@@ -52,7 +49,6 @@ class Produits
 
     public function __construct()
     {
-        $this->commandes = new ArrayCollection();
         $this->tailleStocks = new ArrayCollection();
     }
 
@@ -157,32 +153,7 @@ class Produits
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commandes>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
 
-    public function addCommande(Commandes $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes->add($commande);
-            $commande->addProduitsId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commandes $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            $commande->removeProduitsId($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, TailleStock>

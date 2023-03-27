@@ -8,6 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class CommandesCrudController extends AbstractCrudController
 {
@@ -18,7 +20,7 @@ class CommandesCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield MoneyField::new ('montant')->setCurrency('EUR')->setNumDecimals(0);
+        yield NumberField::new ('montant')->setNumDecimals(0);
         yield ChoiceField::new ('statut')->setChoices([
             'Paid' => 'Paid',
             'Validated' => 'Validated',
@@ -28,7 +30,7 @@ class CommandesCrudController extends AbstractCrudController
         ]);
         yield DateField::new ('date_commande')->hideOnForm();
         yield AssociationField::new ('user_id')
-        ->setFormTypeOptions(['by_reference' => false,]);
+            ->setFormTypeOptions(['by_reference' => false]);
 
 
     }

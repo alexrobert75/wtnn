@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
+use App\Entity\User;
+use App\Entity\TailleStock;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CommandesRepository::class)]
 class Commandes
@@ -23,18 +26,19 @@ class Commandes
     #[ORM\Column]
     private ?int $montant = null;
 
-    #[ORM\ManyToMany(targetEntity: Produits::class, inversedBy: 'commandes')]
-    private Collection $produits_id;
-
     #[ORM\Column(length: 255)]
     private ?string $statut = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
 
+    #[ORM\OneToMany(mappedBy: 'id_commande', targetEntity: CommandeProduitTaille::class)]
+    private Collection $commandeProduitTailles;
+
     public function __construct()
     {
-        $this->produits_id = new ArrayCollection();
+        $this->date_commande = new DateTime();
+        $this->commandeProduitTailles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,30 +70,6 @@ class Commandes
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produits>
-     */
-    public function getProduitsId(): Collection
-    {
-        return $this->produits_id;
-    }
-
-    public function addProduitsId(Produits $produitsId): self
-    {
-        if (!$this->produits_id->contains($produitsId)) {
-            $this->produits_id->add($produitsId);
-        }
-
-        return $this;
-    }
-
-    public function removeProduitsId(Produits $produitsId): self
-    {
-        $this->produits_id->removeElement($produitsId);
-
-        return $this;
-    }
-
     public function getStatut(): ?string
     {
         return $this->statut;
@@ -110,6 +90,36 @@ class Commandes
     public function setDateCommande(\DateTimeInterface $date_commande): self
     {
         $this->date_commande = $date_commande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeProduitTaille>
+     */
+    public function getCommandeProduitTailles(): Collection
+    {
+        return $this->commandeProduitTailles;
+    }
+
+    public function addCommandeProduitTaille(CommandeProduitTaille $commandeProduitTaille): self
+    {
+        if (!$this->commandeProduitTailles->contains($commandeProduitTaille)) {
+            $this->commandeProduitTailles->add($commandeProduitTaille);
+            $commandeProduitTaille->setIdCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeProduitTaille(CommandeProduitTaille $commandeProduitTaille): self
+    {
+        if ($this->commandeProduitTailles->removeElement($commandeProduitTaille)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeProduitTaille->getIdCommande() === $this) {
+                $commandeProduitTaille->setIdCommande(null);
+            }
+        }
 
         return $this;
     }

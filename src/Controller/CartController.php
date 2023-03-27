@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Produits;
+use App\Entity\TailleStock;
 use App\Repository\ProduitsRepository;
+use App\Repository\TailleStockRepository;
 use App\Service\CartService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,13 +22,14 @@ class CartController extends AbstractController
         $dataCart = [];
         $total = 0;
 
-        foreach ($cart as $id => $quantity) {
-            $product = $produitsRepository->find($id);
+        foreach ($cart as $sneaker => $data) {
+            $product = $produitsRepository->find($data['produit']->getId());
             $dataCart[] = [
                 'product' => $product,
-                'quantity' => $quantity,
+                'quantity' => $data['quantity'],
+                'size' => $data['size']
             ];
-            $total += $product->getPrix() * $quantity;
+            $total += $product->getPrix() * $data['quantity'];
         }
 
         return $this->render('cart/cart.html.twig', [
@@ -35,16 +38,18 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id}', name: 'cart_add')]
-    public function add(Produits $produit, SessionInterface $session)
+    #[Route('/cart/add/{id}/{size}', name: 'cart_add')]
+    public function add(ProduitsRepository $produit, SessionInterface $session, $size, $id)
     {
         $cart = $session->get('cart', []);
-        $id = $produit->getId();
+        $id = $produit->find($id);
+        $cart[$id . '-' . $size]['produit'] = $id;
+        $cart[$id . '-' . $size]['size'] = $size;
 
-        if (!empty($cart[$id])) {
-            $cart[$id]++;
+        if (!empty($cart[$id . '-' . $size]['quantity'])) {
+            $cart[$id . '-' . $size]['quantity']++;
         } else {
-            $cart[$id] = 1;
+            $cart[$id . '-' . $size]['quantity'] = 1;
         }
 
         $session->set('cart', $cart);
@@ -53,17 +58,17 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart_render');
     }
 
-    #[Route('/cart/delete/{id}', name: 'cart_delete')]
-    public function delete(Produits $produit, SessionInterface $session)
+    #[Route('/cart/delete/{id}/{size}', name: 'cart_delete')]
+    public function delete(ProduitsRepository $produit, SessionInterface $session, $size, $id)
     {
         $cart = $session->get('cart', []);
-        $id = $produit->getId();
+        $id = $produit->find($id);
 
-        if (!empty($cart[$id])) {
-            if ($cart[$id] <= 1) {
-                unset($cart[$id]);
+        if (!empty($cart[$id . '-' . $size]['quantity'])) {
+            if ($cart[$id . '-' . $size]['quantity'] <= 1) {
+                unset($cart[$id . '-' . $size]);
             } else {
-                $cart[$id]--;
+                $cart[$id . '-' . $size]['quantity']--;
             }
         }
 

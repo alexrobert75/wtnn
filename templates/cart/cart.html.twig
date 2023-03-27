@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+	{{dump(app.session)}}
 	<h1>
 		Your cart</h1>
 	<div class='container-table'>
@@ -23,7 +24,7 @@
 				{% for sneaker in dataCart %}
 					<tr>
 						<th><img src='{{ sneaker.product.photoUrl }}' width='150' alt='{{sneaker.product.slug}}'></th>
-						<th>Vide</th>
+						<th>{{ sneaker.size }}</th>
 						<th>{{sneaker.quantity}}</th>
 						<th>{{sneaker.product.prix}}
 							$</th>
@@ -31,8 +32,8 @@
 							$
 						</th>
 						<th>
-							<a class='btn-table' href='/cart/add/{{ sneaker.product.id }}'>➕</a>
-							<a class='btn-table' href='/cart/delete/{{ sneaker.product.id }}'>➖</a>
+							<a class='btn-table' href='/cart/add/{{ sneaker.product.id }}/{{ sneaker.size }}'>➕</a>
+							<a class='btn-table' href='/cart/delete/{{ sneaker.product.id }}/{{ sneaker.size }}'>➖</a>
 							<a class='btn-table' href='/cart/remove/{{ sneaker.product.id }}'>❌</a>
 						</th>
 					</tr>
@@ -51,9 +52,12 @@
 						$</td>
 				</tr>
 				<tr>
-					<td colspan='5'></td>
+					<td colspan='4'></td>
 					<td>
 						<a href='/cart/removeCart'>🗑</a>
+					</td>
+					<td>
+						<a class='btn-succes' href=''>Order ✅</a>
 					</td>
 				</tr>
 			</tfoot>

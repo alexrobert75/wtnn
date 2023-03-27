@@ -64,11 +64,20 @@ class HomeController extends AbstractController
     #[Route('/ficheproduct/{id}', name: 'app_ficheProduct')]
     public function ficheProduct(ProduitsRepository $produitsRepository, $id, TailleStockRepository $tailleStockRepository): Response
     {
-        $tailleStocks = $tailleStockRepository->findAll();
         $produit = $produitsRepository->find($id);
+        $tailleP = $tailleStockRepository->findBy(['id_produit' => $produit->getId()]);
+
+
+        $tableSize = [];
+        foreach ($tailleP as $sneaker => $value) {
+            $tableSize[] = $value->getTaille();
+        }
+        asort($tableSize);
+
         return $this->render('home/ficheProduct.html.twig', [
             'produit' => $produit,
-            'taille' => $tailleStocks
+            'tableSize' => $tableSize,
+            'tailleProduct' => $tailleP
         ]);
     }
 }

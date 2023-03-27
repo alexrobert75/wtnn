@@ -186,13 +186,15 @@ class ProduitsFixtures extends Fixture
 
 
         $tailleStocks = [];
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $tailleStock = new TailleStock();
             $tailleStock->setTaille($faker->numberBetween(36, 45));
-            $tailleStock->setStock($faker->numberBetween(0, 50));
+            $tailleStock->setStock($faker->numberBetween(0, 500));
             $tailleStock->setIdProduit($faker->randomElement($produits));
-            $tailleStocks[] = $tailleStock;
-            $manager->persist($tailleStock);
+            if ($tailleStock->getIdProduit() ) {
+                $tailleStocks[] = $tailleStock;
+                $manager->persist($tailleStock);
+            }
         }
 
         $manager->flush();

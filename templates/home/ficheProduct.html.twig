@@ -7,7 +7,9 @@
 
 
 {% block body %}
-	{{ dump(taille) }}
+	{# {{dump(produit)}} #}
+	{# {{ dump(tableSize) }} #}
+		{{dump(tailleProduct)}}
 	<div class='card-fiche'>
 
 		<img src='{{ produit.photoUrl }}'>
@@ -18,8 +20,15 @@
 			<p class='price-fiche'>
 				{{ produit.prix}}
 				$</p>
-			<a class='btn btn-fiche' href=''>Select your size
-			</a>
+			{% if tailleProduct is empty %}
+				<p class='msg-stock'>Out of stock</p>
+			{% else %}
+				<div class='container-size'>
+					{% for size in tableSize %}
+						<a class='btn-size' href='/cart/add/{{produit.id}}/{{size}}'>{{size}}</a>
+					{% endfor %}
+				</div>
+			{% endif %}
 			<span>DESCRIPTION:</span>
 			<p class='desc-fiche'>{{ produit.description}}</p>
 			<p class='ref-fiche'>

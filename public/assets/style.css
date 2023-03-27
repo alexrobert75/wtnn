@@ -168,6 +168,20 @@ h3,
     color: rgb(107, 107, 107);
 }
 
+.btn-succes {
+    color: green;
+    font-weight: 500;
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.3s;
+}
+
+.btn-succes:hover {
+    background-color: green;
+    color: white;
+}
+
 /* FORM ---------------------------------------------------------------*/
 
 
@@ -267,6 +281,31 @@ table,
 
 .fiche-txt span {
     font-weight: 400;
+}
+
+.msg-stock {
+    font-size: 22px;
+    font-weight: 300;
+    color: red;
+}
+
+.container-size {
+    display: flex;
+    gap: 7px;
+}
+
+.btn-size {
+    /* background-color: red; */
+    padding: 2px;
+    color: red;
+    border: 1px solid red;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-size:hover {
+    color: white;
+    background-color: red;
 }
 
 /* TABLE --------------------------------------------------------------------------------*/

@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block body %}
+	{{dump(app.session)}}
 	<div class='hero'>
 		<div class='hero-txt'>
 			<p class='hero-new'>New</p>
-			<p>Air Jordan 4 Retro SB <br> <span>Pine Green</span></p>
+			<p>Air Jordan 4 Retro SB
+				<br>
+				<span>Pine Green</span>
+			</p>
 			<a class='btn btn-home' href='/ficheproduct/92'>Discover</a>
 		</div>
 		<div class='contain-img'>
@@ -20,12 +24,7 @@
 		{% for produit in produits %}
 			<a href='/ficheproduct/{{ produit.id }}'>
 				<div class='card'>
-					<img src=
-					{% if 'cdn.shopify' in produit.photourl %}
-					{{produit.photourl}} 
-					{% else %}
-					assets/img/{{produit.photourl}} 	
-					{% endif %} alt='{{produit.slug}}'>
+					<img src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} assets/img/ {{produit.photourl}} {% endif %} alt='{{produit.slug}}'>
 					<h3>{{produit.nom}}</h3>
 					<p class='brand'>
 						{{ produit.categorie | upper }}

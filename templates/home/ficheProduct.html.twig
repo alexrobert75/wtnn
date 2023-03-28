@@ -16,7 +16,7 @@
 					{% if 'cdn.shopify' in produit.photourl %}
 					{{produit.photourl}} 
 					{% else %}
-					../assets/img/{{produit.photourl}} 	
+					'../assets/img/{{produit.photourl}}'
 					{% endif %} alt='{{produit.slug}}'>
 		</div>
 

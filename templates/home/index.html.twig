@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-	{{dump(app.session)}}
 	<div class='hero'>
 		<div class='hero-txt'>
 			<p class='hero-new'>New</p>
@@ -24,7 +23,7 @@
 		{% for produit in produits %}
 			<a href='/ficheproduct/{{ produit.id }}'>
 				<div class='card'>
-					<img src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} 'assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
+					<img class="pic"  src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} 'assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
 					<h3>{{produit.nom}}</h3>
 					<p class='brand'>
 						{{ produit.categorie | upper }}

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Repository\ProduitsRepository;
 use App\Repository\CommandesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TailleStockRepository;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,15 +57,35 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/profile', name: 'app_account')]
-    public function profile(CommandesRepository $commandeRepo): Response
+    public function profile(CommandesRepository $commandeRepo, ProduitsRepository $produitsRepository): Response
     {
         $user = $this->security->getUser();
         $id = $user->getId();
         $commandes = $commandeRepo->findBy(['user_id' => $id]);
+        $wishlist = $user->getWishlist();
+        $wishproducts = [];
+        for ($i = 0; $i < count($wishlist); $i++) {
+            $prod = $produitsRepository->find($wishlist[$i]);
+            $wishproducts[] = $prod;
+        }
         return $this->render(
             'security/account.html.twig',
-            ['commandes' => $commandes]
+            [
+                'commandes' => $commandes,
+                'wishlist' => $wishproducts
+            ]
         );
+    }
+
+    #[Route(path: '/profile/remove/{wish}', name: 'app_profileremovewish')]
+    public function profileremovewish(EntityManagerInterface $entityManager, UserRepository $userRepository, $wish): Response
+    {
+        $id = $this->getUser()->getId();
+        $user = $userRepository->find($id);
+        $user->removeWishlist($wish);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_account');
     }
 
     #[Route(path: '/profile/order/{id}', name: 'app_orderdetails')]
@@ -75,8 +97,10 @@ class SecurityController extends AbstractController
 
         return $this->render(
             'security/orderdetails.html.twig',
-            ['commande' => $commande,
-            'produits' => $shoppingList]
+            [
+                'commande' => $commande,
+                'produits' => $shoppingList
+            ]
         );
     }
 }

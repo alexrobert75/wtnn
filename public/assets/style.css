@@ -56,9 +56,24 @@ a {
     flex-grow: 1;
 }
 
-footer {
+.container3 {
+    margin-top: 4em;
+}
+
+.container2 {
+    margin-top: 2em;
     text-align: center;
 }
+
+.container2 h1,h3 {
+    margin: 0.5em;
+}
+
+.container2 h2 {
+    margin: 1.5em;
+}
+
+
 
 /* NAV USER/ADMIN -----------------------------------------------------------------------------------*/
 
@@ -139,6 +154,7 @@ nav p {
 
 .card {
     /* height: 550px; */
+    position: relative;
     width: 360px;
     padding: 30px;
     margin-left: 10px;
@@ -152,7 +168,7 @@ nav p {
     overflow: hidden;
 }
 
-.card img {
+.pic {
     object-fit: cover;
     height: 200px;
     width: 300px;
@@ -166,6 +182,11 @@ h3,
 .brand {
     font-weight: 500;
     color: rgb(107, 107, 107);
+}
+
+.brand button {
+    margin: 2em;    
+    padding: 1em;
 }
 
 .btn-succes {
@@ -186,6 +207,7 @@ h3,
 
 
 form {
+    text-align: center;
     margin: 34px 0;
     display: flex;
     flex-direction: column;
@@ -197,6 +219,9 @@ form {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.137);
 }
 
+input,label {
+    margin: 0.2em;
+}
 
 /* ACCOUNT PAGE -------------------------------------------------------------*/
 
@@ -207,9 +232,7 @@ form {
     flex-direction: column;
 }
 
-.infos h2,
-h3,
-table,
+.infos table,
 .infos p {
     margin: 0.5em;
 }
@@ -362,4 +385,77 @@ tfoot td {
 
 .productimg img {
     width: 100%;
+}
+
+/* WISHLIST ICON */
+
+.wish {
+    z-index: 10;
+    width: 10%;
+    position: absolute;
+    top: 1%;
+    right:1%;
+}
+
+.wish img {
+    width: 100%;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 4rem;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    background-color: #414141;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: center;
+    padding: 2em;
+}
+
+.footinfos {
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.footcol p {
+    margin: 0.5em;
+}
+
+.footfoot {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+}
+
+.foottitle {
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.social img:hover{
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+/* CONTACT */
+
+#contact input,label,button {
+    margin: 1em;
+    padding: 0.6em;
+}
+
+
+/* FILTRE PRODUIT */
+
+.filter input,label,button {
+    margin: 0.1em;
+    padding: 0.2em;
 }

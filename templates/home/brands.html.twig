@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home
+{% block title %}Brands 
 	{{parent()}}
 {% endblock %}
 
 {% block body %}
 
 
-	<div class='container'>
+	<div class='container container3'>
 		{% for marque in marques %}
 
 				<div class='brand'>
@@ -16,7 +16,7 @@
 					</div>
 					<h3>{{marque.nom}}</h3>
 					<p>{{marque.description  | slice(0,100)}}...</p>
-                    <button><a href='../products?q=&marque%5B%5D={{marque.id}}'>See products</a></button>
+                    <a class='btn-fiche' href='../products?q=&marque%5B%5D={{marque.id}}'>See products</a>
 				</div>
 		{% endfor %}
 	</div>

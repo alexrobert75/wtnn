@@ -1,17 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
+{% block title %}My address
+	{{parent()}}
 {% endblock %}
 
 {% block body %}
-	<h1>Register</h1>
+	<div class="container2">
+		<h1>My address</h1>
 
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.adresse) }}
-	{{ form_row(registrationForm.ville) }}
-	{{ form_row(registrationForm.pays) }}
-    	{{ form_row(registrationForm.code_postal) }}
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.adresse) }}
+		{{ form_row(registrationForm.ville) }}
+		{{ form_row(registrationForm.pays) }}
+		{{ form_row(registrationForm.code_postal) }}
 
-	<button type="submit" class="btn">Register</button>
-	{{ form_end(registrationForm) }}
+		<button type="submit" class="btn">Register</button>
+		{{ form_end(registrationForm) }}
+		<a class='btn-fiche' href={{path('app_account')}}>Back to my profile</a>
+
+	</div>
 {% endblock %}

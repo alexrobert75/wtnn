@@ -18,7 +18,7 @@ class ProductSearchType extends AbstractType
     {
         $builder
             ->add('q', TextType::class, ['label' => false, 'required' => false, 'attr' => ['placeholder' => 'Search']])
-            ->add('marque', EntityType::class, ['label' => 'Brands', 'required' => false, 'class' => Marques::class, 'expanded' => true, 'multiple' => true, 'choice_label' => 'nom'])
+            ->add('marque', EntityType::class, ['label' => false, 'required' => false, 'class' => Marques::class, 'expanded' => true, 'multiple' => true, 'choice_label' => 'nom'])
             ->add('prixmin', NumberType::class, ['label'=>false,'required'=>false,'attr'=>['placeholder' => 'Min price']])
             ->add('prixmax', NumberType::class, ['label'=>false,'required'=>false,'attr'=>['placeholder' => 'Max price']])
             ->add('submit', SubmitType::class, ['label' => 'Search'])

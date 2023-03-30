@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SecurityController!
+{% block title %}My profile
+	{{parent()}}
 {% endblock %}
 
 {% block body %}
+<div class='container2'>
 	<div class="infos" style="text-align: center">
 		<h1>Your account</h1>
 		<h2>{{app.user.prenom}}
@@ -16,31 +18,49 @@
 			{{app.user.ville}}
 			{{app.user.pays}}</p>
 		<hr>
-		<button>
-			<a href={{path('app_address',{'id':app.user.id} )}}>Edit my address</a>
-		</button>
-		<h3>Mes commandes:</h3>
-		<table>
-			<thead>
-				<tr>
-					<th>N° commande</th>
-					<th>Date</th>
-					<th>Montant</th>
-					<th>Statut</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for commande in commandes %}
-					<tr>
-						<td>{{commande.id}}</td>
-						<td>{{commande.datecommande|date('d-m-Y')}}</td>
-						<td>{{commande.montant}}</td>
-						<td>{{commande.statut}}</td>
-						<td><button><a href={{path('app_orderdetails',{'id':commande.id})}}>Details</a></button></td>
 
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{% endblock %}
+		<a class='btn-fiche' href={{path('app_address',{'id':app.user.id} )}}>Edit my address</a>
+
+	<hr>
+	<h2>My orders</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>N° commande</th>
+				<th>Date</th>
+				<th>Montant</th>
+				<th>Statut</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for commande in commandes %}
+				<tr>
+					<td>{{commande.id}}</td>
+					<td>{{commande.datecommande|date('d-m-Y')}}</td>
+					<td>{{commande.montant}}</td>
+					<td>{{commande.statut}}</td>
+					<td>
+						<a class='btn-table' href={{path('app_orderdetails',{'id':commande.id} )}}>Details</a>
+	
+					</td>
+
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<hr>
+	<h2>My Wishlist</h2>
+
+	<table>
+		{% for wish in wishlist %}
+			<tr>
+				<td><img src={% if 'cdn.shopify' in wish.photourl %} {{wish.photoUrl}} {% else %} 'assets/img/{{wish.photoUrl}}' {% endif %} alt={{wish.nom}} style='width: 80px'/></td>
+				<td>{{wish.nom}}</td>
+				<td>
+					<a class='btn-table' href={{path('app_profileremovewish',{'wish':wish.id} )}}>❌</a>
+				</td>
+			</tr>
+		</i>
+	</td>
+
+</tr>{% endfor %}</table></div></div>{% endblock %}

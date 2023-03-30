@@ -78,14 +78,14 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart_render');
     }
 
-    #[Route('/cart/remove/{id}', name: 'cart_remove')]
-    public function remove(Produits $produit, SessionInterface $session)
+    #[Route('/cart/remove/{id}/{size}', name: 'cart_remove')]
+    public function remove(ProduitsRepository $produit, SessionInterface $session, $size, $id)
     {
         $cart = $session->get('cart', []);
-        $id = $produit->getId();
+        $id = $produit->find($id);
 
-        if (!empty($cart[$id])) {
-            unset($cart[$id]);
+        if (!empty($cart[$id . '-' . $size])) {
+            unset($cart[$id . '-' . $size]);
         }
 
         $session->set('cart', $cart);

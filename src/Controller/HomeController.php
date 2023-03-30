@@ -8,6 +8,7 @@ use App\Form\ProductSearchType;
 use App\Repository\MarquesRepository;
 use App\Repository\ProduitsRepository;
 use App\Repository\TailleStockRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,20 +48,75 @@ class HomeController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/products', name: 'app_prod')]
+    #[Route('/products/', name: 'app_prod')]
     public function prod(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $data = new ProductSearch();
-        $data->page = $request->get('page',1);
+        $data->page = $request->get('page', 1);
         $form = $this->createForm(ProductSearchType::class, $data);
         $form->handleRequest($request);
         $produits = $produitsRepository->findSearch($data);
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
         // $produits = $entityManager->getRepository(Produits::class)->findAll();
         return $this->render('home/products.html.twig', [
             'produits' => $produits,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'page' => $page
         ]);
     }
+
+    #[Route('/products/{page}', name: 'app_prodp')]
+    public function prodp(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, Request $request, $page): Response
+    {
+        $data = new ProductSearch();
+        $data->page = $request->get('page', $page);
+        $form = $this->createForm(ProductSearchType::class, $data);
+        $form->handleRequest($request);
+        $produits = $produitsRepository->findSearch($data);
+        $page = $_GET['page'];
+        // $produits = $entityManager->getRepository(Produits::class)->findAll();
+        return $this->render('home/products.html.twig', [
+            'produits' => $produits,
+            'form' => $form->createView(),
+            'page' => $page
+        ]);
+    }
+
+
+    #[Route('/products/add/{wish}/{page}', name: 'app_addwish')]
+    public function addwish(EntityManagerInterface $entityManager, UserRepository $userRepository, $wish, $page): Response
+    {
+        if ($this->getUser()) {
+            $id = $this->getUser()->getId();
+            $user = $userRepository->find($id);
+            $user->addWishlist($wish);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_prod', array('page' => $page));
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+
+    #[Route('/products/remove/{wish}/{page}', name: 'app_removewish')]
+    public function removewish(EntityManagerInterface $entityManager, UserRepository $userRepository, $wish, $page): Response
+    {
+        if ($this->getUser()) {
+            $id = $this->getUser()->getId();
+            $user = $userRepository->find($id);
+            $user->removeWishlist($wish);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_prod', array('page' => $page));
+        } else {
+            return $this->redirectToRoute('app_login');
+        }
+    }
+
 
     #[Route('/ficheproduct/{id}', name: 'app_ficheProduct')]
     public function ficheProduct(ProduitsRepository $produitsRepository, $id, TailleStockRepository $tailleStockRepository): Response

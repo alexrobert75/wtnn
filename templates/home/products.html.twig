@@ -1,41 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home
+{% block title %}Products
 	{{parent()}}
 {% endblock %}
 
 {% block body %}
-
-	{{form_start(form)}}
-	{{ form_row(form.q) }}
-	{{ form_row(form.marque) }}
-	{{ form_row(form.prixmin) }}
-	{{ form_row(form.prixmax) }}
-	{{ form_row(form.submit) }}
-	<button>
-		<a href={{path('app_prod')}}>See all</a>
-	</button>
-	{{form_end(form)}}
-
+	<div class="filter">
+		{{form_start(form)}}
+		{{ form_row(form.q) }}
+		{{ form_row(form.marque) }}
+		{{ form_row(form.prixmin) }}
+		{{ form_row(form.prixmax) }}
+		{{ form_row(form.submit) }}
+		<a class='btn-fiche' href={{path('app_prod')}}>See all</a>
+		{{form_end(form)}}
+	</div>
 
 	<div class='container'>
 		<div class="filters">
 			{{knp_pagination_sortable(produits,'Sort by price','p.prix')}}
 		</div>
 		{% for produit in produits %}
-			<a href='/ficheproduct/{{ produit.id }}'>
-				<div class='card'>
-					<img src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} '../assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
-					<h3>{{produit.nom}}</h3>
-					<p class='brand'>
-						{{ produit.categorie | upper }}
-					</p>
-					<p class='price'>
-						{{produit.prix}}
-						$
-					</p>
-				</div>
-			</a>
+			<div class='card'>
+				{% if app.user.wishlist is defined and produit.id in app.user.wishlist  %}
+					<div class="wish">
+						<a href={{path('app_removewish',{'wish':produit.id, 'page':page} )}}>
+							<img src={{asset('assets/fullwish.png')}}>
+						</a>
+					</div>
+				{% else %}
+					<div class="wish">
+						<a href={{path('app_addwish',{'wish':produit.id, 'page':page} )}}>
+							<img src={{asset('assets/emptywish.png')}}>
+						</a>
+					</div>
+				{% endif %}
+				<a href='/ficheproduct/{{ produit.id }}'>
+					<div class="card">
+						<img class="pic" src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} '../assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
+						<h3>{{produit.nom}}</h3>
+						<p class='brand'>
+							{{ produit.categorie | upper }}
+						</p>
+						<p class='price'>
+							{{produit.prix}}
+							$
+						</p>
+					</div>
+				</a>
+			</div>
 		{% endfor %}
 
 	</div>

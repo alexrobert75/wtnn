@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -19,6 +21,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -28,12 +34,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your name must be at least {{ limit }} characters long',
+        maxMessage: 'Your name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -43,6 +64,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $ville = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        min: 5,
+        max: 5,
+        exactMessage: 'Your Zipcode must be 5 characters long',
+    )]
     private ?string $code_postal = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -202,6 +228,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->wishlist = $wishlist;
 
+        return $this;
+    }
+
+    public function addWishlist($wish): self
+    {   
+        $wishlist = $this->getWishlist();
+        $wishlist[] = $wish;
+        $this->wishlist = $wishlist;
+        return $this;
+    }
+
+    
+    public function removeWishlist($wish): self
+    {   
+        $wishlist = $this->getWishlist();
+        $index = array_search($wish,$wishlist);
+        unset($wishlist[$index]);
+        $wishlist = array_values($wishlist);
+        $this->wishlist = $wishlist;
         return $this;
     }
 

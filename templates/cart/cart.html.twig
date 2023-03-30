@@ -33,7 +33,7 @@
 						<th>
 							<a class='btn-table' href='/cart/add/{{ sneaker.product.id }}/{{ sneaker.size }}'>➕</a>
 							<a class='btn-table' href='/cart/delete/{{ sneaker.product.id }}/{{ sneaker.size }}'>➖</a>
-							<a class='btn-table' href='/cart/remove/{{ sneaker.product.id }}/{{ sneaker.size}}'>❌</a>
+							<a class='btn-table' href='/cart/remove/{{ sneaker.product.id }}/{{ sneaker.size }}'>❌</a>
 						</th>
 					</tr>
 				{% else %}
@@ -56,7 +56,7 @@
 						<a href='/cart/removeCart'>🗑</a>
 					</td>
 					<td>
-						<a class='btn-succes' href=''>Order ✅</a>
+						<a class='btn-succes' href='{{ path('app_checkout')}}'>Order ✅</a>
 					</td>
 				</tr>
 			</tfoot>

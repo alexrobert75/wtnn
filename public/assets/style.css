@@ -377,7 +377,7 @@ tfoot td {
 .productimg {
     width: 40%;
     margin-right: 2em;
-    height: 60%;
+    height: 80%;
     overflow: hidden;
     display: flex;
     align-items: center;

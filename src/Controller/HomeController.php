@@ -51,7 +51,7 @@ class HomeController extends AbstractController
     public function prod(ProduitsRepository $produitsRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $data = new ProductSearch();
-        $data->page = $request->get('page',1);
+        $data->page = $request->get('page', 1);
         $form = $this->createForm(ProductSearchType::class, $data);
         $form->handleRequest($request);
         $produits = $produitsRepository->findSearch($data);
@@ -66,15 +66,24 @@ class HomeController extends AbstractController
     public function ficheProduct(ProduitsRepository $produitsRepository, $id, TailleStockRepository $tailleStockRepository): Response
     {
         $produit = $produitsRepository->find($id);
-        $tailleP = $tailleStockRepository->findBy(['id_produit' => $produit->getId()]);
+        // $tailleP = $tailleStockRepository->findBy(['id_produit' => $produit->getId()]);
+        // dd($tailleP);
+        $tailleP = $tailleStockRepository->createQueryBuilder('t')
+            ->select('t.taille')
+            ->andWhere('t.id_produit = :produit_id')
+            ->andWhere('t.stock > 0')
+            ->orderBy('t.taille', 'ASC')
+            ->setParameter('produit_id', $produit->getId())
+            ->getQuery()
+            ->getResult();
 
+        // dd($tailleP);
 
         $tableSize = [];
         foreach ($tailleP as $sneaker => $value) {
-            $tableSize[] = $value->getTaille();
+            $tableSize[] = $value['taille'];
         }
-        asort($tableSize);
-
+        
         return $this->render('home/ficheProduct.html.twig', [
             'produit' => $produit,
             'tableSize' => $tableSize,

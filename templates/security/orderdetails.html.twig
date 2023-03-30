@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+	{# {{dump(produits)}} #}
 
 	<div class="infos" style="text-align: center">
 		<h1>Commande
@@ -28,15 +28,17 @@
 						<td>{{produit.idprodtaille.getIdProduit().getNom()}}</td>
 						<td>{{produit.idprodtaille.getTaille()}}</td>
 						<td>{{produit.quantite}}</td>
-						<td>{{produit.idprodtaille.getIdProduit().getPrix()}} €</td>
+						<td>{{produit.idprodtaille.getIdProduit().getPrix()}}
+							€</td>
 					</tr>
-				{% endfor %} 
+				{% endfor %}
 				<tr>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>{{commande.montant}} €</td>
+					<td>{{commande.montant}}
+						€</td>
 				</tr>
 			</tbody>
 		</table>

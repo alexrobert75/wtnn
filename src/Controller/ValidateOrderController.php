@@ -37,6 +37,9 @@ class ValidateOrderController extends AbstractController
             if (!$tailleStock || $quantity > $tailleStock->getStock()) {
                 $pbStock++;
                 $cart[$sneaker]['quantity'] = $tailleStock ? $tailleStock->getStock() : 0;
+                $this->addFlash('error', 'Limited stock, quantity updated');
+                $session->set('cart', $cart);
+                return $this->redirectToRoute('cart_render');
             }
         }
 

@@ -30,7 +30,8 @@ class CommandesCrudController extends AbstractCrudController
         ]);
         yield DateField::new ('date_commande')->hideOnForm();
         yield AssociationField::new ('user_id')
-            ->setFormTypeOptions(['by_reference' => false]);
+            ->setFormTypeOptions(['by_reference' => false])
+            ->hideWhenUpdating();
 
 
     }

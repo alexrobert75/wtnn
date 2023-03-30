@@ -7,6 +7,9 @@
 {% block body %}
 	<h1>
 		Your cart</h1>
+			{% for message in app.flashes('error') %}
+		<p>{{message}}</p>
+	{% endfor %}
 	<div class='container-table'>
 		<table>
 			<thead>

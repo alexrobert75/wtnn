@@ -38,7 +38,7 @@ class ProduitsCrudController extends AbstractCrudController
         // yield TextField::new ('photo_url')->hideOnIndex();
         yield ImageField::new ('photo_url')
             ->setBasePath('assets/img/')
-            ->setUploadDir("public\assets\img");
+            ->setUploadDir("public/assets/img");
         yield TextField::new ('couleur');
         yield TextField::new ('ref');
         yield SlugField::new ('slug')->setTargetFieldName('nom')->hideOnIndex();

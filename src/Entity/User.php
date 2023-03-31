@@ -28,7 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private array $role = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -107,18 +107,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRole(): array
+    public function getRoles(): array
     {
-        $role = $this->role;
+        $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $role[] = 'ROLE_USER';
+        $roles[] = 'ROLE_USER';
 
-        return array_unique($role);
+        return array_unique($roles);
     }
 
-    public function setRole(array $role): self
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }

@@ -98,7 +98,7 @@ nav p {
 }
 
 .contain-img {
-    height: 70vh;
+    height: 100vh;
     /* border: 1px solid red; */
     display: flex;
     justify-content: center;
@@ -375,9 +375,9 @@ tfoot td {
 }
 
 .productimg {
-    width: 40%;
+    width: 36em;
     margin-right: 2em;
-    height: 80%;
+    height: 60%;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -404,7 +404,7 @@ tfoot td {
 /* FOOTER */
 
 footer {
-    margin-top: 4rem;
+    margin-top: 10rem;
     text-align: center;
     width: 100%;
     position: relative;

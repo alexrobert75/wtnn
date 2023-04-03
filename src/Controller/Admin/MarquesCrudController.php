@@ -23,6 +23,6 @@ class MarquesCrudController extends AbstractCrudController
         yield TextareaField::new('description');
         yield ImageField::new ('logo')
             ->setBasePath('assets/img/')
-            ->setUploadDir("public\assets\img");
+            ->setUploadDir("public/assets/img");
     }
 }

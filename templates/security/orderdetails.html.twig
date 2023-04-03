@@ -26,7 +26,7 @@
 				<tbody>
 					{% for produit in produits %}
 						<tr>
-							<td><img src={{produit.idprodtaille.getIdProduit().getPhotoUrl()}} alt={{produit.idprodtaille.getIdProduit().getNom()}} style='width: 80px'/></td>
+							<td><img src='../assets/img/{{produit.idprodtaille.getIdProduit().getPhotoUrl()}}' alt={{produit.idprodtaille.getIdProduit().getNom()}} style='width: 80px'/></td>
 							<td>{{produit.idprodtaille.getIdProduit().getNom()}}</td>
 							<td>{{produit.idprodtaille.getTaille()}}</td>
 							<td>{{produit.quantite}}</td>

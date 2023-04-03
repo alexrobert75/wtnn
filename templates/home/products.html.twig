@@ -37,7 +37,7 @@
 				{% endif %}
 				<a href='/ficheproduct/{{ produit.id }}'>
 					<div class="card">
-						<img class="pic" src={% if 'cdn.shopify' in produit.photourl %} {{produit.photourl}} {% else %} '../assets/img/{{produit.photourl}}' {% endif %} alt='{{produit.slug}}'>
+						<img class="pic" src='../assets/img/{{produit.photourl}}' alt='{{produit.slug}}'>
 						<h3>{{produit.nom}}</h3>
 						<p class='brand'>
 							{{ produit.categorie | upper }}

@@ -30,7 +30,7 @@
 		<li>
 			<a href={{path('cart_render')}}>{{'cart' | upper}}({{app.session.get('cart') | length}})</a>
 		</li>
-		{% if app.user.role is defined and "ROLE_ADMIN" in app.user.role %}
+		{% if app.user.roles is defined and "ROLE_ADMIN" in app.user.roles %}
 			<li>
 				<a href={{path('admin')}}>
 					{{'admin' | upper}}</a>
